@@ -30,6 +30,13 @@ public interface Attachment extends DiscordEntity {
     Optional<String> getDescription();
 
     /**
+     * Gets the content type of the attachment.
+     *
+     * @return The content type of the attachment.
+     */
+    Optional<String> getContentType();
+
+    /**
      * Gets the size of the attachment in bytes.
      *
      * @return The size of the attachment in bytes.

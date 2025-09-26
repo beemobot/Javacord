@@ -50,6 +50,11 @@ public class AttachmentImpl implements Attachment {
     private final String description;
 
     /**
+     * The content type of the attachment.
+     */
+    private final String contentType;
+
+    /**
      * The size of the attachment in bytes.
      */
     private final int size;
@@ -105,6 +110,7 @@ public class AttachmentImpl implements Attachment {
         id = data.get("id").asLong();
         fileName = data.get("filename").asText();
         description = data.hasNonNull("description") ? data.get("description").asText() : null;
+        contentType = data.hasNonNull("content_type") ? data.get("content_type").asText() : null;
         size = data.get("size").asInt();
         url = data.get("url").asText();
         proxyUrl = data.get("proxy_url").asText();
@@ -141,6 +147,11 @@ public class AttachmentImpl implements Attachment {
     @Override
     public Optional<String> getDescription() {
         return Optional.ofNullable(description);
+    }
+
+    @Override
+    public Optional<String> getContentType() {
+        return Optional.ofNullable(contentType);
     }
 
     @Override
@@ -231,6 +242,10 @@ public class AttachmentImpl implements Attachment {
 
         if (description != null) {
             attachments.put("description", description);
+        }
+
+        if (contentType != null) {
+            attachments.put("content_type", contentType);
         }
 
         attachments.put("size", size);
